@@ -26,11 +26,11 @@ class Rental extends DomainObject {
     }
 
     public double getCost() {
-        return tape.getMovie().getPriceModel().costForDays(daysRented);
+        return tape.getMovie().getCostForDays(daysRented);
     }
 
     public int getFrequentRenterPoints() {
-        return tape.getMovie().getPriceModel().pointsForDays(daysRented);
+        return tape.getMovie().getPointsForDays(daysRented);
     }
 
     public String getReceiptSummaryLine() {

@@ -4,25 +4,33 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class RentalTest {
     private final String SERIAL_NUMBER = "SERIAL_NUMBER";
 
     @Test
     public void shouldUsePriceModelOfAssignedMovieType() {
-        PriceModel priceModel = PriceModel.REGULAR;
-        final int DAYS = 2;
-        Rental rental = new Rental(new Tape(SERIAL_NUMBER, new Movie("Movie title", priceModel)), DAYS);
+        Movie movie = mock(Movie.class);
+        final int days = 2;
+        final double cost = 20.0;
+        when(movie.getCostForDays(days)).thenReturn(cost);
+        Rental rental = new Rental(new Tape(SERIAL_NUMBER, movie), days);
 
-        assertThat(rental.getCost(), is(priceModel.costForDays(DAYS)));
+        assertThat(rental.getCost(), is(cost));
     }
 
     @Test
     public void shouldUsePointsModelOfAssignedMovieType() {
-        PriceModel priceModel = PriceModel.NEW_RELEASE;
-        final int DAYS = 2;
-        Rental rental = new Rental(new Tape(SERIAL_NUMBER, new Movie("Movie title", priceModel)), DAYS);
 
-        assertThat(rental.getFrequentRenterPoints(), is(priceModel.pointsForDays(DAYS)));
+        Movie movie = mock(Movie.class);
+
+        final int days = 2;
+        int points = 3;
+        when(movie.getPointsForDays(days)).thenReturn(points);
+        Rental rental = new Rental(new Tape(SERIAL_NUMBER, movie), days);
+
+        assertThat(rental.getFrequentRenterPoints(), is(points));
     }
 }

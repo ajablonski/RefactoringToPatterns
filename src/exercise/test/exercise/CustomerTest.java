@@ -65,10 +65,17 @@ public class CustomerTest {
 
     @Test
     public void shouldPrintMovieDescriptionAndPrice() {
-        Rental rental = new Rental(new Tape("", new Movie("Movie name", PriceModel.REGULAR)), 1);
+        Movie movie = mock(Movie.class);
+
+        Double cost = 20.0;
+        int days = 1;
+        when(movie.getCostForDays(days)).thenReturn(cost);
+        String title = "Movie title";
+        when(movie.getName()).thenReturn(title);
+        Rental rental = new Rental(new Tape("", movie), days);
 
         bill.addRental(rental);
 
-        assertThat(bill.statement(), containsString("Movie name\t$2.00"));
+        assertThat(bill.statement(), containsString(title + "\t$20.00"));
     }
 }
