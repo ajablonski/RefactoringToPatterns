@@ -11,7 +11,7 @@ import static org.mockito.Mockito.when;
 
 public class CustomerTest {
     private Customer bill;
-    
+
     @Before
     public void setUp() {
         bill = new Customer("Bill");
@@ -65,7 +65,7 @@ public class CustomerTest {
 
     @Test
     public void shouldPrintMovieDescriptionAndPrice() {
-        Rental rental = new Rental(new Tape("", new Movie("Movie name", Movie.REGULAR)), 1);
+        Rental rental = new Rental(new Tape("", new Movie("Movie name", PriceModel.REGULAR)), 1);
 
         bill.addRental(rental);
 

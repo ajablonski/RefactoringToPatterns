@@ -26,31 +26,11 @@ class Rental extends DomainObject {
     }
 
     public double getCost() {
-        double cost = 0;
-        switch (this.tape().movie().priceCode()) {
-            case Movie.REGULAR:
-                cost += 2;
-                if (this.daysRented() > 2)
-                    cost += (this.daysRented() - 2) * 1.5;
-                break;
-            case Movie.NEW_RELEASE:
-                cost += this.daysRented() * 3;
-                break;
-            case Movie.CHILDRENS:
-                cost += 1.5;
-                if (this.daysRented() > 3)
-                    cost += (this.daysRented() - 3) * 1.5;
-                break;
-
-        }
-        return cost;
+        return tape.movie().getPriceModel().costForDays(daysRented);
     }
 
     public int getFrequentRenterPoints() {
-        if ((this.tape().movie().priceCode() == Movie.NEW_RELEASE) && this.daysRented() > 1)
-            return 2;
-        else
-            return 1;
+        return tape.movie().getPriceModel().pointsForDays(daysRented);
     }
 
     public String getReceiptSummaryLine() {

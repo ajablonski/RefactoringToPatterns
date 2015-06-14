@@ -3,21 +3,16 @@ package exercise;
 // Movie represents the notion of a film. A video store might have several tapes in stock of the same movie
 
 public class Movie extends DomainObject {
-    public static final int  CHILDRENS = 2;
-    public static final int  REGULAR = 0;
-    public static final int  NEW_RELEASE = 1;
+    private final PriceModel priceModel;
 
-
-	private int priceCode;
-
-	public Movie(String name, int priceCode) {
+	public Movie(String name, PriceModel priceModel) {
 		this.name = name;
-		this.priceCode = priceCode;
+        this.priceModel = priceModel;
 	}
 
-	public int priceCode() {
-		return priceCode;
-	}
+    public PriceModel getPriceModel() {
+        return priceModel;
+    }
 
 	public void persist() {
 		Registrar.add ("Movies", this);
