@@ -2,12 +2,7 @@ package exercise;
 
 public class NewReleaseMovie extends Movie {
     public NewReleaseMovie(String name) {
-        super(name);
-    }
-
-    @Override
-    public double getCostForDays(int days) {
-        return days * 3;
+        super(name, 0, 0, 3);
     }
 
     @Override

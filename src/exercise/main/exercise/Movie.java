@@ -3,8 +3,14 @@ package exercise;
 // Movie represents the notion of a film. A video store might have several tapes in stock of the same movie
 
 public abstract class Movie extends DomainObject {
+    private double baseCost;
+    private int daysIncluded;
+    private double ratePerDay;
 
-    public Movie(String name) {
+    protected Movie(String name, double baseCost, int daysIncluded, double ratePerDay) {
+        this.baseCost = baseCost;
+        this.daysIncluded = daysIncluded;
+        this.ratePerDay = ratePerDay;
         this.name = name;
     }
 
@@ -12,9 +18,17 @@ public abstract class Movie extends DomainObject {
     	Registrar.add ("Movies", this);
     }
 
-    public abstract double getCostForDays(int days);
+    public double getCostForDays(int days) {
+        double cost = baseCost;
+        if (days > daysIncluded) {
+            cost += (days - daysIncluded) * ratePerDay;
+        }
+        return cost;
+    }
 
-    public abstract int getPointsForDays(int days);
+    public int getPointsForDays(int days) {
+        return 1;
+    }
 
     public static Movie get(String name) {
 		return (Movie) Registrar.get ("Movies", name);
