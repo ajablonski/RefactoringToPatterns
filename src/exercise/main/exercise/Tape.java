@@ -11,7 +11,11 @@ class Tape extends DomainObject {
         this.movie = movie;
     }
 
-    public Movie movie() {
+    public Movie getMovie() {
         return movie;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
     }
 }

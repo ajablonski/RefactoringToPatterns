@@ -1,19 +1,14 @@
 package exercise;
 
-public class DomainObject {
+public abstract class DomainObject {
     protected String name = "no name";
 
-	public DomainObject (String name)	{
-		this.name = name;
-	};
-
-	public DomainObject ()	{};
-
-	public String name ()	{
+	public String getName()	{
 		return name;
-	};
+	}
 
+	@Override
 	public String toString() {
 		return name;
-	};
+	}
 }

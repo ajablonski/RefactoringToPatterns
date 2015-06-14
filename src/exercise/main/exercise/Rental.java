@@ -10,7 +10,7 @@ class Rental extends DomainObject {
     private int daysRented;
     private Tape tape;
 
-    private final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
+    private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(Locale.US);
 
     public Rental(Tape tape, int daysRented) {
         this.tape = tape;
@@ -26,15 +26,15 @@ class Rental extends DomainObject {
     }
 
     public double getCost() {
-        return tape.movie().getPriceModel().costForDays(daysRented);
+        return tape.getMovie().getPriceModel().costForDays(daysRented);
     }
 
     public int getFrequentRenterPoints() {
-        return tape.movie().getPriceModel().pointsForDays(daysRented);
+        return tape.getMovie().getPriceModel().pointsForDays(daysRented);
     }
 
     public String getReceiptSummaryLine() {
-        return tape().movie().name() + "\t" + CURRENCY_FORMAT.format(getCost());
+        return tape().getMovie().getName() + "\t" + CURRENCY_FORMAT.format(getCost());
     }
 }
 

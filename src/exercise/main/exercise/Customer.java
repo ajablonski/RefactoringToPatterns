@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Locale;
 
 class Customer extends DomainObject {
-    private List<Rental> rentals = new ArrayList<Rental>();
+    private List<Rental> rentals = new ArrayList<>();
 
     public Customer(String name) {
         this.name = name;
@@ -18,7 +18,7 @@ class Customer extends DomainObject {
         NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
         double totalAmount = 0;
         int frequentRenterPoints = 0;
-        String statement = "Rental Record for " + name() + "\n";
+        String statement = "Rental Record for " + getName() + "\n";
         for (Rental rental : rentals) {
             totalAmount += rental.getCost();
             frequentRenterPoints += rental.getFrequentRenterPoints();
